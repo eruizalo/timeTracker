@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.journaldev.spring.mongodb.dao.PersonDAO;
 import com.journaldev.spring.mongodb.dao.PersonDAOImpl;
+import com.journaldev.spring.mongodb.model.ErrorDesc;
 import com.journaldev.spring.mongodb.model.Person;
 import com.mongodb.MongoClient;
 
@@ -73,24 +74,23 @@ public class SpringDataMongoDBMain {
 		Query query = new Query();
 		List<Person> p = this.mongoOps.find(query, Person.class, PERSON_COLLECTION);
 		*/
-		List<Person> p = personInterface.readAll();
-		if (p.isEmpty()){
+		List<Person> personList = personInterface.readAll();
+		if (personList.isEmpty()){
 			return "Empty collection";
 		} else {
-			return p;
+			return personList;
 		}
     }
 	
 	@RequestMapping("/add")
     private String addPerson(@RequestParam(value="id", defaultValue="") String id) {
-		Person p = new Person(id, "Edu", "Ruiz, España");
-		try {
-			mongoOps.insert(p, PERSON_COLLECTION);
-			System.out.println("New Person inserted:" + p);
-	        return "New Person inserted:" + p;
-		} catch (org.springframework.dao.DuplicateKeyException m) {
-			// TODO: handle exception
-			return "DUPLICATE KEY EXCEPTION!!!!";
+		Person newPerson = new Person(id, "Edu", "Ruiz, España");
+		ErrorDesc error = personInterface.create(newPerson);
+		if (error.getErrorCode()==0){
+			return "New person added--> " + newPerson + "<br><br><a href='http://localhost:8080/'>Volver</a>";
+		} else {
+			error.getException().printStackTrace();
+			return error.getErrorDesc();
 		}
     }
 	

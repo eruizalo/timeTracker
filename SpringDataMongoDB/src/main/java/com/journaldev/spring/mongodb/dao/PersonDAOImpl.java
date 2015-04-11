@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.journaldev.spring.mongodb.model.ErrorDesc;
 import com.journaldev.spring.mongodb.model.Person;
 import com.mongodb.WriteResult;
 
@@ -19,15 +20,15 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 	
 	//@Override
-	public String create(Person p) {
+	public ErrorDesc create(Person p) {
 		//this.mongoOps.insert(p, PERSON_COLLECTION);
 		try {
 			this.mongoOps.insert(p, PERSON_COLLECTION);
-			System.out.println("New Person inserted:" + p);
-	        return "New Person inserted:" + p;
-		} catch (org.springframework.dao.DuplicateKeyException m) {
+			//System.out.println("New Person inserted:" + p);
+	        return new ErrorDesc(0, "", null);
+		} catch (Exception e) {
 			// TODO: handle exception
-			return "DUPLICATE KEY EXCEPTION!!!!";
+			return new ErrorDesc(1, e.getCause().toString(), e);
 		}
 	}
 
@@ -38,8 +39,14 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 
 	//@Override
-	public void update(Person p) {
-		this.mongoOps.save(p, PERSON_COLLECTION);
+	public ErrorDesc update(Person p) {
+		try {
+			this.mongoOps.save(p, PERSON_COLLECTION);
+			return new ErrorDesc(0, "", null);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ErrorDesc(3, e.getCause().toString(), e);
+		}
 	}
 
 	//@Override

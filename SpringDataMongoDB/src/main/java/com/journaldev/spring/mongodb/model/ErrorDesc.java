@@ -4,14 +4,14 @@ public class ErrorDesc {
 
 	private int errorCode;
 	private String errorDesc;
-	private String errorFiller;
+	private Exception exception;
 	
-	public ErrorDesc(){};
+	//public ErrorDesc(){};
 	
-	public ErrorDesc(int errorCode, String errorDesc, String errorFiller){
+	public ErrorDesc(int errorCode, String errorDesc, Exception errorException){
 		this.errorCode = errorCode;
 		this.errorDesc = errorDesc;
-		this.errorFiller = errorFiller;
+		this.setException(errorException);
 	}
 	
 	
@@ -40,19 +40,18 @@ public class ErrorDesc {
 	public void setErrorDesc(String errorDesc) {
 		this.errorDesc = errorDesc;
 	}
-	
+
+
 	/**
-	 * @return the errorFiller
+	 * @return the exception
 	 */
-	public String getErrorFiller() {
-		return errorFiller;
+	public Exception getException() {
+		return exception;
 	}
 	/**
-	 * @param errorFiller the errorFiller to set
+	 * @param exception the exception to set
 	 */
-	public void setErrorFiller(String errorFiller) {
-		this.errorFiller = errorFiller;
+	public void setException(Exception exception) {
+		this.exception = exception;
 	}
-	
-	
 }
