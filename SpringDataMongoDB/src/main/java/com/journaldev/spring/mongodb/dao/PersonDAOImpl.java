@@ -36,6 +36,7 @@ public class PersonDAOImpl implements PersonDAO {
 	public Person readById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
 		return this.mongoOps.findOne(query, Person.class, PERSON_COLLECTION);
+		//return this.mongoOps.findById(id, Person.class);
 	}
 
 	//@Override
@@ -57,9 +58,12 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 	
 	public List<Person> readAll() {
-		System.out.println("GET COLLECTION");
-		Query query = new Query();
-		return this.mongoOps.find(query, Person.class, PERSON_COLLECTION);
+		//System.out.println("GET COLLECTION");
+		//Query query = new Query();
+		return this.mongoOps.findAll(Person.class, PERSON_COLLECTION);
+		//return this.mongoOps.find(query, Person.class, PERSON_COLLECTION);
 	}
+	
+	//
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.journaldev.spring.mongodb.dao.JsonDAO;
 import com.journaldev.spring.mongodb.dao.PersonDAO;
 import com.journaldev.spring.mongodb.dao.PersonDAOImpl;
 import com.journaldev.spring.mongodb.model.ErrorDesc;
@@ -31,6 +32,9 @@ public class SpringDataMongoDBMain {
 	private static MongoClient mongo = null;
 	private static MongoOperations mongoOps = null;
 	private static PersonDAO personInterface;
+	private static JsonDAO jsonDao = new JsonDAO();
+	
+	private String getBackLink = "<br><br><a href='http://localhost:8080/'>Volver</a>";
 
 	public static void main(String[] args) {
 		
@@ -84,20 +88,40 @@ public class SpringDataMongoDBMain {
 	
 	@RequestMapping("/add")
     private String addPerson(@RequestParam(value="id", defaultValue="") String id) {
-		Person newPerson = new Person(id, "Edu", "Ruiz, España");
+		Person newPerson = new Person(id, "Edu", "Madrid, España");
 		ErrorDesc error = personInterface.create(newPerson);
 		if (error.getErrorCode()==0){
-			return "New person added--> " + newPerson + "<br><br><a href='http://localhost:8080/'>Volver</a>";
+			return "New person added--> " + newPerson + getBackLink;
 		} else {
 			error.getException().printStackTrace();
-			return error.getErrorDesc();
+			return error.getErrorDesc() + getBackLink;
 		}
     }
 	
 	@RequestMapping("/drop")
     private String dropMongo() {
 		mongoOps.dropCollection(PERSON_COLLECTION);
-		return "MongoDB droped";
+		return "MongoDB droped" + getBackLink;
     }
-
+	
+	@RequestMapping("/delete")
+    private String deletePerson(@RequestParam(value="id", defaultValue="") String id) {
+		Person oldPerson = personInterface.readById(id);
+		int error = personInterface.deleteById(id);
+		if (error==1){
+			return "Deleted person--> " + oldPerson + getBackLink;
+		} else {
+			return "Error while deleting-->" + error + getBackLink;
+		}
+    }
+	@RequestMapping("/get")
+    private String getPerson(@RequestParam(value="id", defaultValue="") String id) {
+		Person person = personInterface.readById(id);
+		if (person != null){
+			String json = jsonDao.objToJson(person);
+			return json + getBackLink;
+		}else {
+			return "" + getBackLink;
+		}
+    }
 }
