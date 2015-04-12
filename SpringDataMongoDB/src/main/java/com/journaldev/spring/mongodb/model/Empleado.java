@@ -15,6 +15,7 @@ public class Empleado {
 	private String username;
 	private Date fechaIncorporacion;
 	private Date fechaBaja;
+	private String proyectoTareaEnCurso;
 	
 	//public Empleado(){}
 	
@@ -25,13 +26,14 @@ public class Empleado {
 		this.username = username;
 		this.fechaIncorporacion = new Date();
 		this.fechaBaja = null;
+		this.setProyectoTareaEnCurso(null);
 	}
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
+	/*public void setId(String id) {
 		this.id = id;
-	}
+	}*/
 	public String getName() {
 		return nombre;
 	}
@@ -65,9 +67,9 @@ public class Empleado {
 	/**
 	 * @param fechaIncorporacion the fechaIncorporacion to set
 	 */
-	public void setFechaIncorporacion(Date fechaIncorporacion) {
+	/*public void setFechaIncorporacion(Date fechaIncorporacion) {
 		this.fechaIncorporacion = fechaIncorporacion;
-	}
+	}*/
 	/**
 	 * @return the fechaBaja
 	 */
@@ -79,5 +81,17 @@ public class Empleado {
 	 */
 	public void setFechaBaja(Date fechaBaja) {
 		this.fechaBaja = fechaBaja;
+	}
+	/**
+	 * @return the proyectoTareaEnCurso
+	 */
+	public String getProyectoTareaEnCurso() {
+		return proyectoTareaEnCurso;
+	}
+	/**
+	 * @param proyectoTareaEnCurso the proyectoTareaEnCurso to set
+	 */
+	public void setProyectoTareaEnCurso(String proyectoTareaEnCurso) {
+		this.proyectoTareaEnCurso = proyectoTareaEnCurso;
 	}
 }

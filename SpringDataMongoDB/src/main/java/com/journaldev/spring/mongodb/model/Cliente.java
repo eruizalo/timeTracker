@@ -18,7 +18,7 @@ public class Cliente {
 	private Date fechaInicio;
 	private String audUsuario;
 	private ArrayList<Perfil> listaTarifasCliente;
-	private List<String> listaProyectosActivos;
+	private ArrayList<String> listaProyectosActivos;
 	private String ultimoProyecto;
 	private Date fechaUltimoProyecto;
 	
@@ -41,7 +41,7 @@ public class Cliente {
 		perfil = new Perfil(Perfil.maestroJediId, perfil.getTarifa(Perfil.maestroJediId));
 		this.listaTarifasCliente.add(perfil);
 		
-		this.listaProyectosActivos = null;
+		this.listaProyectosActivos = new ArrayList<String>();
 		this.ultimoProyecto = null;
 		this.fechaUltimoProyecto = null;
 	}
@@ -106,7 +106,7 @@ public class Cliente {
 		return listaProyectosActivos;
 	}
 
-	public void setListaProyectosActivos(List<String> listaProyectosActivos) {
+	public void setListaProyectosActivos(ArrayList<String> listaProyectosActivos) {
 		this.listaProyectosActivos = listaProyectosActivos;
 	}
 

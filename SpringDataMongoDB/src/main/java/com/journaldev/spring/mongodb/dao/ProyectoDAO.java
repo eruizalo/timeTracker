@@ -16,4 +16,9 @@ public interface ProyectoDAO {
 	public int deleteById(String id);
 	
 	public List<Proyecto> readAll();
+	
+	public ErrorDesc addTareaProyecto (String idProyecto, String idEmpleado,
+			String tarea, String horas);
+	
+	public ErrorDesc finishTareaProyecto (String idEmpleado);
 }

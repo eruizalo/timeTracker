@@ -34,12 +34,12 @@ public class Proyecto {
 		this.creador = creador;
 		this.cliente = cliente;
 		this.responsable = responsable;
-		this.listaTareas = null;
+		this.listaTareas = new ArrayList<String>();
 		this.listaTarifasProyecto = listaTarifasProyecto;
 		this.fechaInicio = new Date();
 		this.fechaFin = null;
 		this.audUsuario = audUsuario;
-		this.listaHorasImputadas = null;
+		this.listaHorasImputadas = new ArrayList<TareaImputada>();
 	}
 
 	public String getId() {

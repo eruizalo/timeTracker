@@ -1,20 +1,19 @@
 package com.journaldev.spring.mongodb.model;
 
-import java.security.Timestamp;
+import java.util.Date;
 
 public class TareaImputada {
 
 	private String idUsuario;
-	private Timestamp timestampInicio;
-	private Timestamp timestampFin;
+	private Date inicioTarea;
+	private Date finTarea;
 	private String tarea;
 
-	public TareaImputada(String idUsuario, Timestamp timestampInicio,
-			Timestamp timestampFin, String tarea) {
+	public TareaImputada(String idUsuario, String tarea) {
 		super();
 		this.idUsuario = idUsuario;
-		this.timestampInicio = timestampInicio;
-		this.timestampFin = timestampFin;
+		this.inicioTarea = new Date();
+		this.finTarea = null;
 		this.tarea = tarea;
 	}
 
@@ -28,36 +27,36 @@ public class TareaImputada {
 	/**
 	 * @param idUsuario the idUsuario to set
 	 */
-	public void setIdUsuario(String idUsuario) {
+	/*public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
+	}*/
+
+	/**
+	 * @return the inicioTarea
+	 */
+	public Date getinicioTarea() {
+		return inicioTarea;
 	}
 
 	/**
-	 * @return the timestampInicio
+	 * @param inicioTarea the inicioTarea to set
 	 */
-	public Timestamp getTimestampInicio() {
-		return timestampInicio;
+	/*public void setinicioTarea(Date inicioTarea) {
+		this.inicioTarea = inicioTarea;
+	}*/
+
+	/**
+	 * @return the finTarea
+	 */
+	public Date getfinTarea() {
+		return finTarea;
 	}
 
 	/**
-	 * @param timestampInicio the timestampInicio to set
+	 * @param finTarea the finTarea to set
 	 */
-	public void setTimestampInicio(Timestamp timestampInicio) {
-		this.timestampInicio = timestampInicio;
-	}
-
-	/**
-	 * @return the timestampFin
-	 */
-	public Timestamp getTimestampFin() {
-		return timestampFin;
-	}
-
-	/**
-	 * @param timestampFin the timestampFin to set
-	 */
-	public void setTimestampFin(Timestamp timestampFin) {
-		this.timestampFin = timestampFin;
+	public void setfinTarea(Date finTarea) {
+		this.finTarea = finTarea;
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class TareaImputada {
 	/**
 	 * @param tarea the tarea to set
 	 */
-	public void setTarea(String tarea) {
+	/*public void setTarea(String tarea) {
 		this.tarea = tarea;
-	}
+	}*/
 }

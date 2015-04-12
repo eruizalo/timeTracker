@@ -23,8 +23,8 @@ public class Perfil {
 	}
 	
 	public Perfil(byte id, float tarifa) {
-		this.setId(id);
-		this.setTarifa(tarifa);
+		this.id = id;
+		this.tarifa = tarifa;
 	}
 
 	/**
@@ -36,9 +36,9 @@ public class Perfil {
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(byte id) {
+	/*public void setId(byte id) {
 		this.id = id;
-	}
+	}*/
 
 	/**
 	 * @return the tarifa

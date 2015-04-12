@@ -59,9 +59,7 @@ public class SpringDataMongoDBMain {
 			interfazProyectos = new ProyectoDAOImpl(mongoOps);
 			
 			// POR DEFECTO VACIAMOS LA BBDD
-			mongoOps.dropCollection(COLECCION_EMPLEADOS);
-			mongoOps.dropCollection(COLECCION_CLIENTES);
-			mongoOps.dropCollection(COLECCION_PROYECTOS);
+			dropDBs();
 			
 			
 			//AÑADIMOS POR DEFECTO
@@ -74,6 +72,7 @@ public class SpringDataMongoDBMain {
 			
 			Proyecto proyecto1 = new Proyecto("1", "Proyecto1", empleado1.getId(), cliente1.getId(), empleado1.getId(),
 					cliente1.getListaTarifasCliente(), empleado1.getId());
+			proyecto1.getListaTareas().add("DYD");
 			Proyecto proyecto2 = new Proyecto("2", "Proyecto2", empleado1.getId(), cliente1.getId(), empleado1.getId(),
 					cliente1.getListaTarifasCliente(), empleado1.getId());
 			Proyecto proyecto3 = new Proyecto("3", "Proyecto3", empleado1.getId(), cliente1.getId(), empleado1.getId(),
@@ -138,10 +137,15 @@ public class SpringDataMongoDBMain {
 	
 	@RequestMapping("/drop")
     private String dropMongo() {
-		mongoOps.dropCollection(COLECCION_EMPLEADOS);
-		mongoOps.dropCollection(COLECCION_CLIENTES);
+		dropDBs();
 		return "MongoDB droped" + getBackLink;
     }
+	
+	private static void dropDBs() {
+		mongoOps.dropCollection(COLECCION_EMPLEADOS);
+		mongoOps.dropCollection(COLECCION_CLIENTES);
+		mongoOps.dropCollection(COLECCION_PROYECTOS);
+	}
 	
 	@RequestMapping("/delete")
     private String deleteEmpleado(@RequestParam(value="id", defaultValue="") String id) {
@@ -198,7 +202,26 @@ public class SpringDataMongoDBMain {
 			String json = jsonDao.objToJson(proyecto);
 			return json + getBackLink;
 		}else {
-			return "Cliente no encontrado" + getBackLink;
+			return "Proyecto no encontrado" + getBackLink;
 		}
+    }
+	
+	@RequestMapping("/addTarea")
+    private String addTareaProyecto(@RequestParam(value="id") String idProyecto,
+    		@RequestParam(value="idUser") String idEmpleado,
+    		@RequestParam(value="tarea") String tarea,
+    		@RequestParam(value="horas") String horas) {
+		
+		ErrorDesc error = interfazProyectos.addTareaProyecto(idProyecto, idEmpleado, tarea, horas);
+		
+		return error.getErrorDesc() + getBackLink;
+    }
+	
+	@RequestMapping("/finishTarea")
+    private String finishTareaProyecto(@RequestParam(value="id") String idEmpleado) {
+		
+		ErrorDesc error = interfazProyectos.finishTareaProyecto(idEmpleado);
+		
+		return error.getErrorDesc() + getBackLink;
     }
 }
