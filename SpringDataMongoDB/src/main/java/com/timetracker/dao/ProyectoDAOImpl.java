@@ -1,4 +1,4 @@
-package com.journaldev.spring.mongodb.dao;
+package com.timetracker.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,11 +8,11 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import com.journaldev.spring.mongodb.model.Empleado;
-import com.journaldev.spring.mongodb.model.ErrorDesc;
-import com.journaldev.spring.mongodb.model.Proyecto;
-import com.journaldev.spring.mongodb.model.TareaImputada;
 import com.mongodb.WriteResult;
+import com.timetracker.model.Empleado;
+import com.timetracker.model.ErrorDesc;
+import com.timetracker.model.Proyecto;
+import com.timetracker.model.TareaImputada;
 
 public class ProyectoDAOImpl implements ProyectoDAO{
 
@@ -64,7 +64,7 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 	}
 	
 	public ErrorDesc addTareaProyecto (String idProyecto, String idEmpleado,
-			String tarea, String horas){
+			String tarea){
 		
 		EmpleadoDAO interfazEmpleados = new EmpleadoDAOImpl(mongoOps);
 		

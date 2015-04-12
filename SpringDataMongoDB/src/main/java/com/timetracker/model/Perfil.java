@@ -1,4 +1,4 @@
-package com.journaldev.spring.mongodb.model;
+package com.timetracker.model;
 
 
 public class Perfil {

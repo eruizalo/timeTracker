@@ -1,9 +1,9 @@
-package com.journaldev.spring.mongodb.dao;
+package com.timetracker.dao;
 
 import java.util.List;
 
-import com.journaldev.spring.mongodb.model.Proyecto;
-import com.journaldev.spring.mongodb.model.ErrorDesc;
+import com.timetracker.model.ErrorDesc;
+import com.timetracker.model.Proyecto;
 
 public interface ProyectoDAO {
 
@@ -18,7 +18,7 @@ public interface ProyectoDAO {
 	public List<Proyecto> readAll();
 	
 	public ErrorDesc addTareaProyecto (String idProyecto, String idEmpleado,
-			String tarea, String horas);
+			String tarea);
 	
 	public ErrorDesc finishTareaProyecto (String idEmpleado);
 }

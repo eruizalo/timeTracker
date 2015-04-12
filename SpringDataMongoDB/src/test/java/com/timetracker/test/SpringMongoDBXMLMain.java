@@ -1,10 +1,10 @@
-package com.journaldev.spring.mongodb.main;
+package com.timetracker.test;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.journaldev.spring.mongodb.dao.EmpleadoDAO;
-import com.journaldev.spring.mongodb.model.Empleado;
-import com.journaldev.spring.mongodb.model.Perfil;
+import com.timetracker.dao.EmpleadoDAO;
+import com.timetracker.model.Empleado;
+import com.timetracker.model.Perfil;
 
 public class SpringMongoDBXMLMain {
 

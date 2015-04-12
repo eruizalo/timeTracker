@@ -1,4 +1,4 @@
-package com.journaldev.spring.mongodb.dao;
+package com.timetracker.dao;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

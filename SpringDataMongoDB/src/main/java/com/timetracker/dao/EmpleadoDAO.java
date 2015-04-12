@@ -1,9 +1,9 @@
-package com.journaldev.spring.mongodb.dao;
+package com.timetracker.dao;
 
 import java.util.List;
 
-import com.journaldev.spring.mongodb.model.ErrorDesc;
-import com.journaldev.spring.mongodb.model.Empleado;
+import com.timetracker.model.Empleado;
+import com.timetracker.model.ErrorDesc;
 
 public interface EmpleadoDAO {
 

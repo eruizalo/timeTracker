@@ -1,4 +1,4 @@
-package com.journaldev.spring.mongodb.dao;
+package com.timetracker.dao;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import com.journaldev.spring.mongodb.model.ErrorDesc;
-import com.journaldev.spring.mongodb.model.Empleado;
 import com.mongodb.WriteResult;
+import com.timetracker.model.Empleado;
+import com.timetracker.model.ErrorDesc;
 
 public class EmpleadoDAOImpl implements EmpleadoDAO {
 

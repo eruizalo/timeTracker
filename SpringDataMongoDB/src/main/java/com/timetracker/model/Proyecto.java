@@ -1,4 +1,4 @@
-package com.journaldev.spring.mongodb.model;
+package com.timetracker.model;
 
 import java.util.ArrayList;
 import java.util.Date;
