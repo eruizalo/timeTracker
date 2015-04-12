@@ -61,7 +61,6 @@ public class SpringDataMongoDBMain {
 			// POR DEFECTO VACIAMOS LA BBDD
 			dropDBs();
 			
-			
 			//AÑADIMOS POR DEFECTO
 			Empleado empleado1 = new Empleado("1", "Mace Windu", Perfil.maestroJediId, "mace");
 			Empleado empleado2 = new Empleado("2", "Qui-Gon Jinn", Perfil.jediId, "quigon");
