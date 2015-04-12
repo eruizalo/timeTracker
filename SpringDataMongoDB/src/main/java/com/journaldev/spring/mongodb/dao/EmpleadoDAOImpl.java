@@ -7,23 +7,23 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.journaldev.spring.mongodb.model.ErrorDesc;
-import com.journaldev.spring.mongodb.model.Person;
+import com.journaldev.spring.mongodb.model.Empleado;
 import com.mongodb.WriteResult;
 
-public class PersonDAOImpl implements PersonDAO {
+public class EmpleadoDAOImpl implements EmpleadoDAO {
 
 	private MongoOperations mongoOps;
-	private static final String PERSON_COLLECTION = "Person";
+	private static final String COLECCION_EMPLEADOS = "Empleados";
 	
-	public PersonDAOImpl(MongoOperations mongoOps){
+	public EmpleadoDAOImpl(MongoOperations mongoOps){
 		this.mongoOps=mongoOps;
 	}
 	
 	//@Override
-	public ErrorDesc create(Person p) {
+	public ErrorDesc create(Empleado p) {
 		//this.mongoOps.insert(p, PERSON_COLLECTION);
 		try {
-			this.mongoOps.insert(p, PERSON_COLLECTION);
+			this.mongoOps.insert(p, COLECCION_EMPLEADOS);
 			//System.out.println("New Person inserted:" + p);
 	        return new ErrorDesc(0, "", null);
 		} catch (Exception e) {
@@ -33,16 +33,16 @@ public class PersonDAOImpl implements PersonDAO {
 	}
 
 	//@Override
-	public Person readById(String id) {
+	public Empleado readById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
-		return this.mongoOps.findOne(query, Person.class, PERSON_COLLECTION);
+		return this.mongoOps.findOne(query, Empleado.class, COLECCION_EMPLEADOS);
 		//return this.mongoOps.findById(id, Person.class);
 	}
 
 	//@Override
-	public ErrorDesc update(Person p) {
+	public ErrorDesc update(Empleado p) {
 		try {
-			this.mongoOps.save(p, PERSON_COLLECTION);
+			this.mongoOps.save(p, COLECCION_EMPLEADOS);
 			return new ErrorDesc(0, "", null);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -53,17 +53,15 @@ public class PersonDAOImpl implements PersonDAO {
 	//@Override
 	public int deleteById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
-		WriteResult result = this.mongoOps.remove(query, Person.class, PERSON_COLLECTION);
+		WriteResult result = this.mongoOps.remove(query, Empleado.class, COLECCION_EMPLEADOS);
 		return result.getN();
 	}
 	
-	public List<Person> readAll() {
+	public List<Empleado> readAll() {
 		//System.out.println("GET COLLECTION");
 		//Query query = new Query();
-		return this.mongoOps.findAll(Person.class, PERSON_COLLECTION);
+		return this.mongoOps.findAll(Empleado.class, COLECCION_EMPLEADOS);
 		//return this.mongoOps.find(query, Person.class, PERSON_COLLECTION);
 	}
-	
-	//
 
 }

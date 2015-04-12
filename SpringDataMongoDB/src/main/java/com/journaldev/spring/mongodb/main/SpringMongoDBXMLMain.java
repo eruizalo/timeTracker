@@ -2,30 +2,31 @@ package com.journaldev.spring.mongodb.main;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.journaldev.spring.mongodb.dao.PersonDAO;
-import com.journaldev.spring.mongodb.model.Person;
+import com.journaldev.spring.mongodb.dao.EmpleadoDAO;
+import com.journaldev.spring.mongodb.model.Empleado;
+import com.journaldev.spring.mongodb.model.Perfil;
 
 public class SpringMongoDBXMLMain {
 
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
 		
-		PersonDAO personDAO = ctx.getBean("personDAO", PersonDAO.class);
+		EmpleadoDAO personDAO = ctx.getBean("personDAO", EmpleadoDAO.class);
 		
-		Person p = new Person(null, "PankajKr", "Bangalore, India");
+		Empleado p = new Empleado("1", "Mace Windu", Perfil.maestroJediId, "mace");
 		
 		//create
 		personDAO.create(p);
 		System.out.println("Generated ID="+p.getId());
 		
 		//read
-		Person p1 = personDAO.readById(p.getId());
+		Empleado p1 = personDAO.readById(p.getId());
 		System.out.println("Retrieved Person="+p1);
 		
 		//update
-		p1.setName("David");p1.setAddress("SFO, USA");
+		p1.setName("David");p1.setName("mace2");
 		personDAO.update(p1);
-		Person temp = personDAO.readById(p1.getId());
+		Empleado temp = personDAO.readById(p1.getId());
 		System.out.println("Retrieved Person after update="+temp);
 		
 		//delete
