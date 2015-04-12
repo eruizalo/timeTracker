@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.mongodb.MongoClient;
 import com.timetracker.dao.ClienteDAO;

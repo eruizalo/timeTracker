@@ -66,14 +66,48 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 	public ErrorDesc addTareaProyecto (String idProyecto, String idEmpleado,
 			String tarea){
 		
-		EmpleadoDAO interfazEmpleados = new EmpleadoDAOImpl(mongoOps);
+		EmpleadoDAO interfazEmpleados;
+		Empleado empleado;
+		String idProyectoTarea;
+		Proyecto proyecto;
+		ArrayList<TareaImputada> listaTareasImputadas;
+		int index;
+		boolean encontrado;
 		
-		Empleado empleado = interfazEmpleados.readById(idEmpleado);
+		interfazEmpleados = new EmpleadoDAOImpl(mongoOps);
+		empleado = interfazEmpleados.readById(idEmpleado);
+		
 		if (empleado == null){
 			return new ErrorDesc(1, "Empleado no encontrado", null);
 		}
 		
-		String idProyectoTarea = empleado.getProyectoTareaEnCurso();
+		proyecto = readById(idProyecto);
+		if (proyecto == null){
+			return new ErrorDesc(2, "Proyecto no encontrado", null);
+		}
+		
+		listaTareasImputadas = proyecto.getListaHorasImputadas();
+		index = 0;
+		encontrado = false;
+		
+		while (!encontrado && index < listaTareasImputadas.size()) {
+			if (listaTareasImputadas.get(index).getIdUsuario().equals(idEmpleado)){
+				if (listaTareasImputadas.get(index).getTarea().equals(tarea)) {
+					if (null == listaTareasImputadas.get(index).getfinTarea()){
+						encontrado = true;
+						listaTareasImputadas.get(index).setfinTarea(new Date());
+						empleado.setProyectoTareaEnCurso(null);
+					}
+				}
+			}
+			index++;
+		}
+		
+		if (encontrado){
+			return new ErrorDesc(3, "El empleado ya está imputando en esa tarea", null);
+		}
+		
+		idProyectoTarea = empleado.getProyectoTareaEnCurso();
 		if (idProyectoTarea != null){
 			ErrorDesc error = finishTareaProyecto(idEmpleado);
 			if (error.getErrorCode() != 0){
@@ -81,18 +115,12 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 				return error;
 			}
 		}
-		
-		Proyecto proyecto = readById(idProyecto);
-		if (proyecto == null){
-			return new ErrorDesc(2, "Proyecto no encontrado", null);
-		}
-		
+		 
 		if (!proyecto.getListaTareas().contains(tarea)){
-			return new ErrorDesc(3, "Tarea no encontrada en el proyecto", null);
+			return new ErrorDesc(4, "Tarea no encontrada en el proyecto", null);
 		}
 		
-		// Añadir comprobación de horas isDigit
-		proyecto.getListaHorasImputadas().add(new TareaImputada(idEmpleado, tarea));
+		listaTareasImputadas.add(new TareaImputada(idEmpleado, tarea));
 		update(proyecto);
 		
 		empleado.setProyectoTareaEnCurso(idProyecto);
