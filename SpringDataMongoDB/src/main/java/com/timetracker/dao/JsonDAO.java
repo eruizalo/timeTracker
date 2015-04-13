@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class JsonDAO {
 
-	public String objToJson (Object obj) {
+	public static String objToJson (Object obj) {
 		
 		String json = "";
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();

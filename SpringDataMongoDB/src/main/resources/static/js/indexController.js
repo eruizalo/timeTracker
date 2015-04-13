@@ -7,5 +7,8 @@ app.controller('indexController', [ '$scope', '$http',
 			$http.get('/getEmpleados').success(function(data) {
 				$scope.listaEmpleados = data;
 			});
+			$http.get('/get?id=1').success(function(data) {
+				$scope.empleado1 = data;
+			});
 		}
 } ]);
