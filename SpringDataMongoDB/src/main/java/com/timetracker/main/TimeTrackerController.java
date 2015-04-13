@@ -2,10 +2,11 @@ package com.timetracker.main;
 
 import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.timetracker.dao.JsonDAO;
 import com.timetracker.model.Cliente;
@@ -14,7 +15,8 @@ import com.timetracker.model.ErrorDesc;
 import com.timetracker.model.Perfil;
 import com.timetracker.model.Proyecto;
 
-@RestController
+@Controller
+//@RestController
 public class TimeTrackerController {
 	
 	private static JsonDAO jsonDao = new JsonDAO();
@@ -22,20 +24,8 @@ public class TimeTrackerController {
 	private String getBackLink = "<br><br><a href='http://localhost:8080/'>Volver</a>";
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-    private Object listarEmpleados() {
-		/*
-		System.out.println("GET COLLECTION");
-		Query query = new Query();
-		List<Person> p = this.mongoOps.find(query, Person.class, PERSON_COLLECTION);
-		*/
-		List<Empleado> listaEmpleados = TimeTrackerMain.interfazEmpleados.readAll();
-		/*if (personList.isEmpty()){
-			return "Empty collection";
-		} else {
-			return personList;
-		}*/
-		//List<Cliente> listaClientes = interfazClientes.readAll();
-		return listaEmpleados;
+    private String index(Model model) {
+		return "index";
     }
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

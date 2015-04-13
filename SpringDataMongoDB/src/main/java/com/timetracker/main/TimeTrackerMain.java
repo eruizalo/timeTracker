@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
@@ -20,6 +21,7 @@ import com.timetracker.model.Empleado;
 import com.timetracker.model.Perfil;
 import com.timetracker.model.Proyecto;
 
+@Configuration
 @ComponentScan
 @EnableAutoConfiguration
 public class TimeTrackerMain {
@@ -93,6 +95,7 @@ public class TimeTrackerMain {
 		
 		SpringApplication.run(TimeTrackerMain.class, args);
 	}
+	
 	
 	static void dropDBs() {
 		mongoOps.dropCollection(COLECCION_EMPLEADOS);
