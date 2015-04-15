@@ -188,7 +188,7 @@
                                 <i class="fa fa-archive"></i> <a href="/proyectos">Proyectos</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file-text"></i> Proyecto {{proyecto.name}}
+                                <i class="fa fa-file-text"></i> Proyecto: {{proyecto.nombre}}
                             </li>
                         </ol>
                     </div>
@@ -197,7 +197,7 @@
                 
                  <!-- Body -->
                 <div class="jumbotron">
-                	<form role="form" action="anadirTarea(form)">
+                	<form role="form">
                         <div class="form-group">
                             <label>Nombre</label>
                             <p class="help-block"><small>{{proyecto.nombre}}</small></p>
@@ -216,28 +216,28 @@
                         </div>
                         <div class="form-group">
                             <label>Lista de tareas</label>
-                            <select class="form-control">
+                            <select class="form-control" ng-model="tareaSeleccionada">
                                 <option ng-repeat="tarea in proyecto.listaTareas">{{tarea}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Tarifas</label>
                             <div class="table-responsive" ng-show="proyecto.listaHorasImputadas.length > 0">
-	                        <table class="table table-bordered table-hover table-striped">
-	                            <thead>
-	                                <tr>
-	                                    <th>Perfil</th>
-	                                    <th>Tarifa</th>
-	                                </tr>
-	                            </thead>
-	                            <tbody>
-	                                <tr ng-repeat="tarifas in proyecto.listaTarifasProyecto">
-	                                    <td ng-init="nombrePerfil=getPerfil(tarifas.id)">{{nombrePerfil}}</td>
-	                                    <td>{{tarifas.tarifa}} €/h</td>
-	                                </tr>
-	                            </tbody>
-	                        </table>
-	                    </div>
+		                        <table class="table table-bordered table-hover table-striped">
+		                            <thead>
+		                                <tr>
+		                                    <th>Perfil</th>
+		                                    <th>Tarifa</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                                <tr ng-repeat="tarifas in proyecto.listaTarifasProyecto">
+		                                    <td ng-init="nombrePerfil=getPerfil(tarifas.id)">{{nombrePerfil}}</td>
+		                                    <td>{{tarifas.tarifa}} €/h</td>
+		                                </tr>
+		                            </tbody>
+		                        </table>
+	                    	</div>
                         </div>
                         <div class="form-group" ng-init="fechaInicio=getFecha(proyecto.fechaInicio)">
                             <label>Fecha inicio</label>
@@ -268,7 +268,8 @@
 	                            </tbody>
 	                        </table>
 	                    </div>
-                        <button type="submit" class="btn btn-primary">Comenzar tarea</button>
+                        <button type="button" class="btn btn-primary" ng-disable="{{tareaSeleccionada===null}}"
+                        	ng-click="/">Comenzar tarea</button>
                     </form>
                 </div>
 

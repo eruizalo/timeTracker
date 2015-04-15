@@ -23,7 +23,7 @@ public class ProyectosController {
 	
 	@RequestMapping(value = "/getProyecto", method = RequestMethod.GET)
     private String getProyecto(@RequestParam(value="id", defaultValue="") String id) {
-		Proyecto proyecto = TimeTrackerMain.interfazProyectos.readById(id);
+		Proyecto proyecto = TimeTrackerMain.interfazProyectos.readById(Integer.parseInt(id)+"");
 		/*if (proyecto != null){
 			String json = jsonDao.objToJson(proyecto);
 			return json + getBackLink;

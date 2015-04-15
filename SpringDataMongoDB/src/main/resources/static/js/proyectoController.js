@@ -9,11 +9,7 @@ app.controller('proyectoController', [ '$scope', '$http',
 		$scope.listaPerfiles;
 		
 		$http.get('/getEmpleadoLogueado').success(function(data) {
-			data.fechaIncorporacion = new Date(data.fechaIncorporacion).toLocaleDateString();
 			$scope.empleado = data;
-			$http.get('/getNombrePerfil?id=' + $scope.empleado.perfil).success(function(data) {
-				$scope.perfilEmpleado = data;
-			});
 		});
 		
 		
@@ -36,7 +32,7 @@ app.controller('proyectoController', [ '$scope', '$http',
 		};
 		
 		$scope.getProyecto = function() {
-			$http.get('/getProyecto?id=1').success(function(data) {
+			$http.get('/getProyecto?id=' + $scope.$id).success(function(data) {
 				$scope.proyecto = data;
 				$scope.fechaInicio = $scope.getFecha(data.fechaInicio);
 				$scope.fechaFin    = $scope.getFecha(data.fechaFin);
@@ -49,10 +45,6 @@ app.controller('proyectoController', [ '$scope', '$http',
 			}
 			var fecha = new Date(data).toLocaleDateString();
 			return fecha;
-		};
-		
-		$scope.anadirTarea = function (form){
-			console.log('ok');
 		};
 		
 } ]);
