@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.timetracker.dao.JsonDAO;
@@ -14,7 +15,6 @@ public class TimeTrackerController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     private String index(Model model) {
-		EmpleadosController.empleadoLogueado = JsonDAO.objToJson(TimeTrackerMain.interfazEmpleados.readById("1"));
 		return "index";
     }
 	
@@ -26,6 +26,11 @@ public class TimeTrackerController {
 	@RequestMapping(value = "/proyectos", method = RequestMethod.GET)
     private String proyectos(Model model) {
 		return "proyectos";
+    }
+	
+	@RequestMapping(value = "/proyecto", method = RequestMethod.GET)
+    private String proyecto(@RequestParam(value="id", defaultValue="") String id, Model model) {
+		return "proyecto";
     }
 	
 	@RequestMapping(value = "empleados", method = RequestMethod.GET)

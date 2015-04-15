@@ -29,7 +29,7 @@
 
 </head>
 
-<body ng-controller="proyectoController" ng-init="">
+<body ng-controller="proyectoController" ng-init="getProyecto()">
 
     <div id="wrapper">
 
@@ -58,7 +58,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                            <strong>{{empleado.name}}</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -74,7 +74,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                            <strong>{{empleado.name}}</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -90,7 +90,7 @@
                                     </span>
                                     <div class="media-body">
                                         <h5 class="media-heading">
-                                            <strong>John Smith</strong>
+                                            <strong>{{empleado.name}}</strong>
                                         </h5>
                                         <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                                         <p>Lorem ipsum dolor sit amet, consectetur...</p>
@@ -131,7 +131,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{empleado.name}} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -152,7 +152,7 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="/"><i class="fa fa-fw fa-home"></i> Overview</a>
                     </li>
                     <li class="active">
@@ -185,10 +185,10 @@
                                 <i class="fa fa-home"></i> <a href="/">Overview</a>
                             </li>
                             <li>
-                                <i class="fa fa-user"></i> <a href="/proyectos">Proyectos</a>
+                                <i class="fa fa-archive"></i> <a href="/proyectos">Proyectos</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-user"></i> Proyecto {{proyecto.name}}
+                                <i class="fa fa-file-text"></i> Proyecto {{proyecto.name}}
                             </li>
                         </ol>
                     </div>
@@ -197,7 +197,63 @@
                 
                  <!-- Body -->
                 <div class="jumbotron">
-					<h3>Not implemented yet</h3>
+                	<form role="form" action="añadirTarea">
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <p class="help-block"><small>{{proyecto.nombre}}</small></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Creador</label>
+                            <p class="help-block"><small>{{proyecto.creador}}</small></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Cliente</label>
+                            <p class="help-block"><small>{{proyecto.cliente}}</small></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Responsable</label>
+                            <p class="help-block"><small>{{proyecto.responsable}}</small></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Lista de tareas</label>
+                            <select class="form-control">
+                                <option ng-repeat="tarea in listaTareas">{{tarea}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tarifas</label>
+                            <p class="help-block"><small>{{listaTarifasProyecto}}</small></p>
+                        </div>
+                        <div class="form-group" ng-init="fechaInicio=getFecha(proyecto.fechaInicio)">
+                            <label>Fecha inicio</label>
+                            <p class="help-block"><small>{{fechaInicio}}</small></p>
+                        </div>
+                        <div class="form-group" ng-init="fechaInicio=getFecha(proyecto.fechaFin)">
+                            <label>Fecha fin</label>
+                            <p class="help-block"><small>{{fechaFin}}</small></p>
+                        </div>
+	                    <div class="table-responsive" ng-show="listaTareasImputadas.length > 0">
+	                        <table class="table table-bordered table-hover table-striped">
+	                            <thead>
+	                                <tr>
+	                                    <th>Empleado</th>
+	                                    <th>Inicio Tarea</th>
+	                                    <th>Fin Tarea</th>
+	                                    <th>Tarea</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr ng-repeat="imputado in listaTareasImputadas">
+	                                    <td>{{imputado.idUsuario}}</td>
+	                                    <td ng-init="fechaInicio=getFecha(imputado.inicioTarea)">{{fechaInicio}}</td>
+	                                    <td ng-init="fechaFin=getFecha(imputado.finTarea)">{{fechaFin}}</td>
+	                                    <td>{{imputado.tarea}}</td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+                        <button type="submit" class="btn btn-primary">Comenzar tarea</button>
+                    </form>
                 </div>
 
             </div>

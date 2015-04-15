@@ -63,7 +63,10 @@ public class TimeTrackerMain {
 			
 			Proyecto proyecto1 = new Proyecto("1", "Proyecto1", empleado1.getId(), cliente1.getId(), empleado1.getId(),
 					cliente1.getListaTarifasCliente(), empleado1.getId());
-			proyecto1.getListaTareas().add("DYD");
+			proyecto1.getListaTareas().add("Análisis");
+			proyecto1.getListaTareas().add("Diseño");
+			proyecto1.getListaTareas().add("Desarrollo");
+			proyecto1.getListaTareas().add("Implantación");
 			Proyecto proyecto2 = new Proyecto("2", "Proyecto2", empleado1.getId(), cliente1.getId(), empleado1.getId(),
 					cliente1.getListaTarifasCliente(), empleado1.getId());
 			proyecto2.getListaTareas().add("DYD");

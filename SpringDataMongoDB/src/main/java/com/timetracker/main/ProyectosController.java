@@ -43,4 +43,14 @@ public class ProyectosController {
     private long getNumProyectos() {
 		return TimeTrackerMain.interfazProyectos.countProyectos();
     }
+
+	@RequestMapping(value = "/getListaTareas", method = RequestMethod.GET)
+    private List<String> getListaTareas(@RequestParam(value="id", defaultValue="") String id) {
+		return TimeTrackerMain.interfazProyectos.readById(id).getListaTareas();
+    }
+
+	@RequestMapping(value = "/getImputaciones", method = RequestMethod.GET)
+    private String getListaImputaciones(@RequestParam(value="id", defaultValue="") String id) {
+		return JsonDAO.objToJson(TimeTrackerMain.interfazProyectos.readById(id).getListaHorasImputadas());
+    }
 }
