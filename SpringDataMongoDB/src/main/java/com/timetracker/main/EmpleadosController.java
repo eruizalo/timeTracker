@@ -23,7 +23,7 @@ public class EmpleadosController {
 		return listaEmpleados;
     }
 	
-	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	@RequestMapping(value = "/getEmpleado", method = RequestMethod.GET)
     private String getEmpleado(@RequestParam(value="id", defaultValue="") String id) {
 		Empleado empleado = TimeTrackerMain.interfazEmpleados.readById(id);
 		/*if (empleado != null){
@@ -33,6 +33,16 @@ public class EmpleadosController {
 			return "Empleado no encontrado" + getBackLink;
 		}*/
 		return JsonDAO.objToJson(empleado);
+    }
+	
+	@RequestMapping(value = "/getNombrePerfil", method = RequestMethod.GET)
+    private String getNombrePerfil(@RequestParam(value="id", defaultValue="") byte id) {
+		return Perfil.getTarifaName(id);
+    }
+	
+	@RequestMapping(value = "/getNumEmpleados", method = RequestMethod.GET)
+    private long getNumEmpleados() {
+		return TimeTrackerMain.interfazEmpleados.countEmpleados();
     }
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

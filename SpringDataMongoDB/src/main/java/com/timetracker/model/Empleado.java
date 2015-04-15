@@ -67,9 +67,9 @@ public class Empleado {
 	/**
 	 * @param fechaIncorporacion the fechaIncorporacion to set
 	 */
-	/*public void setFechaIncorporacion(Date fechaIncorporacion) {
+	public void setFechaIncorporacion(Date fechaIncorporacion) {
 		this.fechaIncorporacion = fechaIncorporacion;
-	}*/
+	}
 	/**
 	 * @return the fechaBaja
 	 */

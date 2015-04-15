@@ -16,4 +16,6 @@ public interface EmpleadoDAO {
 	public int deleteById(String id);
 	
 	public List<Empleado> readAll();
+	
+	public long countEmpleados();
 }

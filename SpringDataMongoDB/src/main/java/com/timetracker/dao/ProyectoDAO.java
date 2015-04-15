@@ -21,4 +21,8 @@ public interface ProyectoDAO {
 			String tarea);
 	
 	public ErrorDesc finishTareaProyecto (String idEmpleado);
+	
+	public long countProyectos();
+	
+	public long countTareas();
 }

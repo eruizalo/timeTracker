@@ -53,7 +53,7 @@ public class Perfil {
 		this.tarifa = tarifa;
 	}
 	
-	public float getTarifa(byte idTarifa){
+	public static float getTarifa(byte idTarifa){
 		switch (idTarifa) {
 		case padawanId:
 			return padawanTarifa;
@@ -66,7 +66,7 @@ public class Perfil {
 		}
 	}
 	
-	public String getTarifaName(byte idTarifa){
+	public static String getTarifaName(byte idTarifa){
 		switch (idTarifa) {
 		case padawanId:
 			return padawanName;

@@ -29,4 +29,19 @@ public class TareaController {
 		
 		return JsonDAO.objToJson(error);
     }
+	
+	@RequestMapping(value = "/getNumTareas", method = RequestMethod.GET)
+    private int getNumTareas() {
+		return 0;
+    }
+	
+	@RequestMapping(value = "/getNumTareasProyecto", method = RequestMethod.GET)
+    private int getNumTareasProyecto(@RequestParam(value="id") String idProyecto) {
+		return 0;
+    }
+	
+	@RequestMapping(value = "/getNumTareasEmpleado", method = RequestMethod.GET)
+    private long getNumTareasEmpleado(@RequestParam(value="id") String idProyecto) {
+		return TimeTrackerMain.interfazProyectos.countTareas();
+    }
 }

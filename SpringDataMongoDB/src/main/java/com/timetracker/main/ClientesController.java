@@ -31,4 +31,9 @@ public class ClientesController {
 		}*/
 		return JsonDAO.objToJson(cliente);
     }
+	
+	@RequestMapping(value = "/getNumClientes", method = RequestMethod.GET)
+    private long getNumClientes() {
+		return TimeTrackerMain.interfazClientes.countClientes();
+    }
 }

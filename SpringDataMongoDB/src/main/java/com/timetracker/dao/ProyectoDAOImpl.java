@@ -23,7 +23,7 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		this.mongoOps=mongoOps;
 	}
 	
-	//@Override
+	@Override
 	public ErrorDesc create(Proyecto proyecto) {
 		
 		try {
@@ -35,13 +35,13 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		}
 	}
 
-	//@Override
+	@Override
 	public Proyecto readById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
 		return this.mongoOps.findOne(query, Proyecto.class, COLECCION_PROYECTOS);
 	}
 
-	//@Override
+	@Override
 	public ErrorDesc update(Proyecto proyecto) {
 		try {
 			this.mongoOps.save(proyecto, COLECCION_PROYECTOS);
@@ -52,17 +52,19 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		}
 	}
 
-	//@Override
+	@Override
 	public int deleteById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
 		WriteResult result = this.mongoOps.remove(query, Proyecto.class, COLECCION_PROYECTOS);
 		return result.getN();
 	}
-	
+
+	@Override
 	public List<Proyecto> readAll() {
 		return this.mongoOps.findAll(Proyecto.class, COLECCION_PROYECTOS);
 	}
 	
+	@Override
 	public ErrorDesc addTareaProyecto (String idProyecto, String idEmpleado,
 			String tarea){
 		
@@ -129,6 +131,7 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		return new ErrorDesc(0, "Horas imputadas a la tarea", null);
 	}
 	
+	@Override
 	public ErrorDesc finishTareaProyecto (String idEmpleado){
 		
 		EmpleadoDAO interfazEmpleados = new EmpleadoDAOImpl(mongoOps);
@@ -176,5 +179,30 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		interfazEmpleados.update(empleado);
 		
 		return new ErrorDesc(0, "Tarea finalizada", null);
+	}
+
+	@Override
+	public long countProyectos() {
+		Query query = new Query();
+		return this.mongoOps.count(query, COLECCION_PROYECTOS);
+	}
+
+	@Override
+	public long countTareas() {
+		Long contador = (long) 0;
+		List<Proyecto> proyectos = this.mongoOps.findAll(Proyecto.class, COLECCION_PROYECTOS);
+		int index = 0;
+		ArrayList<TareaImputada> listaTareas;
+		
+		while (index < proyectos.size()){
+			listaTareas = proyectos.get(index).getListaHorasImputadas();
+			for (int i = 0; i < listaTareas.size(); i++) {
+				if (listaTareas.get(index).getfinTarea() != null){
+					contador++;
+				}
+			}
+		}
+		
+		return contador;
 	}
 }

@@ -16,4 +16,6 @@ public ErrorDesc create(Cliente p);
 	public int deleteById(String id);
 	
 	public List<Cliente> readAll();
+	
+	public long countClientes();
 }

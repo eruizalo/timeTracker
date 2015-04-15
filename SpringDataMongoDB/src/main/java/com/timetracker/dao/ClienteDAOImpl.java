@@ -19,7 +19,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		this.mongoOps=mongoOps;
 	}
 	
-	//@Override
+	@Override
 	public ErrorDesc create(Cliente cliente) {
 		
 		try {
@@ -31,13 +31,13 @@ public class ClienteDAOImpl implements ClienteDAO{
 		}
 	}
 
-	//@Override
+	@Override
 	public Cliente readById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
 		return this.mongoOps.findOne(query, Cliente.class, COLECCION_CLIENTES);
 	}
 
-	//@Override
+	@Override
 	public ErrorDesc update(Cliente cliente) {
 		try {
 			this.mongoOps.save(cliente, COLECCION_CLIENTES);
@@ -48,7 +48,7 @@ public class ClienteDAOImpl implements ClienteDAO{
 		}
 	}
 
-	//@Override
+	@Override
 	public int deleteById(String id) {
 		Query query = new Query(Criteria.where("_id").is(id));
 		WriteResult result = this.mongoOps.remove(query, Cliente.class, COLECCION_CLIENTES);
@@ -57,5 +57,11 @@ public class ClienteDAOImpl implements ClienteDAO{
 	
 	public List<Cliente> readAll() {
 		return this.mongoOps.findAll(Cliente.class, COLECCION_CLIENTES);
+	}
+
+	@Override
+	public long countClientes() {
+		Query query = new Query();
+		return this.mongoOps.count(query, COLECCION_CLIENTES);
 	}
 }

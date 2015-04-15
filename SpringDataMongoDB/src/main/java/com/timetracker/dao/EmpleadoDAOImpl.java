@@ -63,5 +63,10 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		return this.mongoOps.findAll(Empleado.class, COLECCION_EMPLEADOS);
 		//return this.mongoOps.find(query, Person.class, PERSON_COLLECTION);
 	}
+	
+	public long countEmpleados() {
+		Query query = new Query();
+		return this.mongoOps.count(query, COLECCION_EMPLEADOS);
+	}
 
 }

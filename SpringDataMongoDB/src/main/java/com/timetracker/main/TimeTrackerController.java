@@ -14,6 +14,31 @@ public class TimeTrackerController {
 		return "index";
     }
 	
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+    private String profile(Model model) {
+		return "profile";
+    }
+	
+	@RequestMapping(value = "/proyectos", method = RequestMethod.GET)
+    private String proyectos(Model model) {
+		return "proyectos";
+    }
+	
+	@RequestMapping(value = "empleados", method = RequestMethod.GET)
+    private String empleados(Model model) {
+		return "empleados";
+    }
+	
+	@RequestMapping(value = "/clientes", method = RequestMethod.GET)
+    private String clientes(Model model) {
+		return "clientes";
+    }
+	
+	@RequestMapping(value = "/tareasEnCurso", method = RequestMethod.GET)
+    private String tareasActivas(Model model) {
+		return "tareasEnCurso";
+    }
+	
 	@RequestMapping(value = "/drop", method = RequestMethod.GET)
     private String dropMongo() {
 		TimeTrackerMain.dropDBs();
