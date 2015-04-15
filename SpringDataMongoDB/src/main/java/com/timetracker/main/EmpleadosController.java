@@ -1,5 +1,6 @@
 package com.timetracker.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.ui.Model;
@@ -11,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.timetracker.model.Empleado;
 import com.timetracker.model.ErrorDesc;
 import com.timetracker.model.Perfil;
+import com.timetracker.model.PerfilNombre;
 import com.timetracker.dao.JsonDAO;
 
 @RestController
 public class EmpleadosController {
 
+	static String empleadoLogueado = null;
 	
 	@RequestMapping(value = "/getEmpleados", method = RequestMethod.GET)
     private List<Empleado> listarEmpleados(Model model) {
@@ -35,9 +38,27 @@ public class EmpleadosController {
 		return JsonDAO.objToJson(empleado);
     }
 	
+	@RequestMapping(value = "/getEmpleadoLogueado", method = RequestMethod.GET)
+    private String getEmpleadoLogueado() {
+		return empleadoLogueado;
+    }
+	
 	@RequestMapping(value = "/getNombrePerfil", method = RequestMethod.GET)
     private String getNombrePerfil(@RequestParam(value="id", defaultValue="") byte id) {
 		return Perfil.getTarifaName(id);
+    }
+
+	@RequestMapping(value = "/getPerfiles", method = RequestMethod.GET)
+    private List<PerfilNombre> getPerfiles() {
+		ArrayList<PerfilNombre> listaPerfiles = new ArrayList<PerfilNombre>();
+		ArrayList<Byte> listaIDPerfiles = Perfil.getListaIDPerfiles();
+		
+		for (int i = 0; i < listaIDPerfiles.size(); i++) {
+			listaPerfiles.add(new PerfilNombre(listaIDPerfiles.get(i),
+					Perfil.getTarifaName(listaIDPerfiles.get(i))));
+		}
+		
+		return listaPerfiles;
     }
 	
 	@RequestMapping(value = "/getNumEmpleados", method = RequestMethod.GET)

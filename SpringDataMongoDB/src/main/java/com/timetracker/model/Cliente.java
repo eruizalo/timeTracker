@@ -33,13 +33,10 @@ public class Cliente {
 		this.audUsuario = audUsuario;
 		
 		this.listaTarifasCliente = new ArrayList<Perfil>();
-		Perfil perfil = new Perfil();
-		perfil = new Perfil(Perfil.padawanId, perfil.getTarifa(Perfil.padawanId));
-		this.listaTarifasCliente.add(perfil);
-		perfil = new Perfil(Perfil.jediId, perfil.getTarifa(Perfil.jediId));
-		this.listaTarifasCliente.add(perfil);
-		perfil = new Perfil(Perfil.maestroJediId, perfil.getTarifa(Perfil.maestroJediId));
-		this.listaTarifasCliente.add(perfil);
+		
+		this.listaTarifasCliente.add(new Perfil(Perfil.padawanId, Perfil.getTarifa(Perfil.padawanId)));
+		this.listaTarifasCliente.add(new Perfil(Perfil.jediId, Perfil.getTarifa(Perfil.jediId)));
+		this.listaTarifasCliente.add(new Perfil(Perfil.maestroJediId, Perfil.getTarifa(Perfil.maestroJediId)));
 		
 		this.listaProyectosActivos = new ArrayList<String>();
 		this.ultimoProyecto = null;

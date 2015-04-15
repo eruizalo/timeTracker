@@ -66,9 +66,9 @@ public class TimeTrackerMain {
 			proyecto1.getListaTareas().add("DYD");
 			Proyecto proyecto2 = new Proyecto("2", "Proyecto2", empleado1.getId(), cliente1.getId(), empleado1.getId(),
 					cliente1.getListaTarifasCliente(), empleado1.getId());
+			proyecto2.getListaTareas().add("DYD");
 			Proyecto proyecto3 = new Proyecto("3", "Proyecto3", empleado1.getId(), cliente1.getId(), empleado1.getId(),
 					cliente1.getListaTarifasCliente(), empleado1.getId());
-			
 			
 			interfazEmpleados.create(empleado1);
 			interfazEmpleados.create(empleado2);
@@ -80,6 +80,9 @@ public class TimeTrackerMain {
 			interfazProyectos.create(proyecto1);
 			interfazProyectos.create(proyecto2);
 			interfazProyectos.create(proyecto3);
+			
+			interfazProyectos.addTareaProyecto(proyecto1.getId(), empleado1.getId(), proyecto1.getListaTareas().get(0));
+			interfazProyectos.addTareaProyecto(proyecto2.getId(), empleado3.getId(), proyecto2.getListaTareas().get(0));
 			
 			
 		} catch (UnknownHostException e) {

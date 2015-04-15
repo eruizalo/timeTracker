@@ -33,6 +33,12 @@ public class ProyectosController {
 		return JsonDAO.objToJson(proyecto);
     }
 	
+	@RequestMapping(value = "/getNombreProyecto", method = RequestMethod.GET)
+    private String getNombreProyecto(@RequestParam(value="id", defaultValue="") String id) {
+		Proyecto proyecto = TimeTrackerMain.interfazProyectos.readById(id);
+		return proyecto.getNombre();
+    }
+	
 	@RequestMapping(value = "/getNumProyectos", method = RequestMethod.GET)
     private long getNumProyectos() {
 		return TimeTrackerMain.interfazProyectos.countProyectos();

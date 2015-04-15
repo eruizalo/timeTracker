@@ -1,5 +1,7 @@
 package com.timetracker.model;
 
+import java.util.ArrayList;
+
 
 public class Perfil {
 	
@@ -18,9 +20,9 @@ public class Perfil {
 	private byte id;
 	private float tarifa;
 	
-	public Perfil (){
+	/*public Perfil (){
 		
-	}
+	}*/
 	
 	public Perfil(byte id, float tarifa) {
 		this.id = id;
@@ -77,5 +79,15 @@ public class Perfil {
 		default:
 			return "Perfil no encontrado";
 		}
+	}
+	
+	public static ArrayList<Byte> getListaIDPerfiles (){
+		ArrayList<Byte> listaPerfiles = new ArrayList<Byte>();
+		
+		listaPerfiles.add(padawanId);
+		listaPerfiles.add(jediId);
+		listaPerfiles.add(maestroJediId);
+		
+		return listaPerfiles;
 	}
 }
