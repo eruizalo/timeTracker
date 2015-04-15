@@ -5,6 +5,8 @@ app.controller('proyectoController', [ '$scope', '$http',
 	function($scope, $http) {
 	
 		$scope.empleadoLogueado = 'No one logged in';
+		$scope.proyecto;
+		$scope.listaPerfiles;
 		
 		$http.get('/getEmpleadoLogueado').success(function(data) {
 			data.fechaIncorporacion = new Date(data.fechaIncorporacion).toLocaleDateString();
@@ -14,12 +16,7 @@ app.controller('proyectoController', [ '$scope', '$http',
 			});
 		});
 		
-		$scope.proyecto;
-		$scope.listaTareas;
-		$scope.listaTarifasProyecto = 'Not implemented';
-		$scope.listaTareasImputadas;
 		
-		$scope.listaPerfiles;
 		$http.get('/getPerfiles').success(function(data) {
 			$scope.listaPerfiles = data;
 		});
@@ -43,15 +40,6 @@ app.controller('proyectoController', [ '$scope', '$http',
 				$scope.proyecto = data;
 				$scope.fechaInicio = $scope.getFecha(data.fechaInicio);
 				$scope.fechaFin    = $scope.getFecha(data.fechaFin);
-				$http.get('/getListaTareas?id='+$scope.proyecto.id).success(function(lista) {
-					$scope.listaTareas = lista;
-					
-				});
-				$http.get('/getImputaciones?id='+$scope.proyecto.id).success(function(listaImputaciones) {
-					$scope.listaTareasImputadas = listaImputaciones;
-					console.log(listaImputaciones.length);
-					
-				});
 			});
 		};
 		
@@ -61,6 +49,10 @@ app.controller('proyectoController', [ '$scope', '$http',
 			}
 			var fecha = new Date(data).toLocaleDateString();
 			return fecha;
+		};
+		
+		$scope.anadirTarea = function (form){
+			console.log('ok');
 		};
 		
 } ]);
