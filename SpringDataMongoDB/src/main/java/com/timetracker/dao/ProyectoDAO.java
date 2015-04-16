@@ -1,5 +1,6 @@
 package com.timetracker.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.timetracker.model.ErrorDesc;
@@ -25,4 +26,6 @@ public interface ProyectoDAO {
 	public long countProyectos();
 	
 	public long countTareas();
+
+	public List<Proyecto> readProyectosCliente(String id);
 }

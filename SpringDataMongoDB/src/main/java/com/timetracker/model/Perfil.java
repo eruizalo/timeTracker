@@ -18,6 +18,7 @@ public class Perfil {
 	private static final String maestroJediName = "Maestro Jedi";
 	
 	private byte id;
+	private int numPerfiles;
 	private float tarifa;
 	
 	/*public Perfil (){
@@ -26,6 +27,7 @@ public class Perfil {
 	
 	public Perfil(byte id, float tarifa) {
 		this.id = id;
+		this.numPerfiles = 0;
 		this.tarifa = tarifa;
 	}
 
@@ -55,6 +57,14 @@ public class Perfil {
 		this.tarifa = tarifa;
 	}
 	
+	public int getNumPerfiles() {
+		return numPerfiles;
+	}
+
+	public void setNumPerfiles(int numPerfiles) {
+		this.numPerfiles = numPerfiles;
+	}
+
 	public static float getTarifa(byte idTarifa){
 		switch (idTarifa) {
 		case padawanId:

@@ -1,5 +1,6 @@
 package com.timetracker.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import com.timetracker.model.Proyecto;
 @RestController
 public class ProyectosController {
 	
-	static String proyectoSeleccionado = "";
+	static Proyecto proyectoSeleccionado;
 
 	
 	@RequestMapping(value = "/getProyectos", method = RequestMethod.GET)
@@ -27,7 +28,21 @@ public class ProyectosController {
     private String getProyecto(@RequestParam(value="id", defaultValue="") String id) {
 		/*Proyecto proyecto = TimeTrackerMain.interfazProyectos.readById(Integer.parseInt(id)+"");
 		return JsonDAO.objToJson(proyecto);*/
-		return proyectoSeleccionado;
+		return JsonDAO.objToJson(proyectoSeleccionado);
+    }
+	
+	@RequestMapping(value = "/getProyectosCliente", method = RequestMethod.GET)
+    private List<Proyecto> getProyectosCliente(@RequestParam(value="id", defaultValue="") String id) {
+		//System.out.println(JsonDAO.objToJson(TimeTrackerMain.interfazProyectos.readProyectosCliente(id)));
+		//return TimeTrackerMain.interfazProyectos.readProyectosCliente(id);
+		List<Proyecto> listaProyectos = new ArrayList<Proyecto>();
+		
+		for (int i = 0; i < ClientesController.clienteSeleccionado.getListaProyectosActivos().size(); i++) {
+			listaProyectos.add(TimeTrackerMain.interfazProyectos.readById(
+					ClientesController.clienteSeleccionado.getListaProyectosActivos().get(i)));
+		}
+		
+		return listaProyectos;
     }
 	
 	@RequestMapping(value = "/getNombreProyecto", method = RequestMethod.GET)

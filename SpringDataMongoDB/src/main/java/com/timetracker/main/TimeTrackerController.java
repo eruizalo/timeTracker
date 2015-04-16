@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.timetracker.dao.JsonDAO;
-
 @Controller
 //@RestController
 public class TimeTrackerController {
@@ -31,7 +29,9 @@ public class TimeTrackerController {
 	
 	@RequestMapping(value = "/proyecto", method = RequestMethod.GET)
     private String proyecto(@RequestParam(value="id", defaultValue="") String id, Model model) {
-		ProyectosController.proyectoSeleccionado = JsonDAO.objToJson(TimeTrackerMain.interfazProyectos.readById(id));
+		if (!id.equals("")) {
+			ProyectosController.proyectoSeleccionado = TimeTrackerMain.interfazProyectos.readById(id);
+		}
 		return "proyecto";
     }
 	
@@ -47,13 +47,20 @@ public class TimeTrackerController {
 	
 	@RequestMapping(value = "/cliente", method = RequestMethod.GET)
     private String cliente(@RequestParam(value="id", defaultValue="") String id, ModelMap model) {
-		ClientesController.clienteSeleccionado = JsonDAO.objToJson(TimeTrackerMain.interfazClientes.readById(id));
+		if (!id.equals("")) {
+			ClientesController.clienteSeleccionado = TimeTrackerMain.interfazClientes.readById(id);
+		}
 		return "cliente";
     }
 	
 	@RequestMapping(value = "/tareasEnCurso", method = RequestMethod.GET)
     private String tareasActivas(Model model) {
 		return "tareasEnCurso";
+    }
+	
+	@RequestMapping(value = "/generarFactura", method = RequestMethod.GET)
+    private String generarFactura(Model model) {
+		return "generarFactura";
     }
 	
 	@RequestMapping(value = "/drop", method = RequestMethod.GET)

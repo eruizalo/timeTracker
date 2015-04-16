@@ -18,7 +18,7 @@ import com.timetracker.dao.JsonDAO;
 @RestController
 public class EmpleadosController {
 
-	static String empleadoLogueado = JsonDAO.objToJson(TimeTrackerMain.interfazEmpleados.readById("1"));
+	static Empleado empleadoLogueado = TimeTrackerMain.interfazEmpleados.readById("1");
 	
 	@RequestMapping(value = "/getEmpleados", method = RequestMethod.GET)
     private List<Empleado> listarEmpleados(Model model) {
@@ -40,7 +40,7 @@ public class EmpleadosController {
 	
 	@RequestMapping(value = "/getEmpleadoLogueado", method = RequestMethod.GET)
     private String getEmpleadoLogueado() {
-		return empleadoLogueado;
+		return JsonDAO.objToJson(empleadoLogueado);
     }
 	
 	@RequestMapping(value = "/getNombrePerfil", method = RequestMethod.GET)

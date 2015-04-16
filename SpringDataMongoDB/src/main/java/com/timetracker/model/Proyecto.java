@@ -129,4 +129,20 @@ public class Proyecto {
 	public void setListaHorasImputadas(ArrayList<TareaImputada> listaHorasImputadas) {
 		this.listaHorasImputadas = listaHorasImputadas;
 	}
+	
+	public void sumaPerfilAImputar (byte perfil) {
+		for (int i = 0; i < listaTarifasProyecto.size(); i++) {
+			if(listaTarifasProyecto.get(i).getId() == perfil){
+				listaTarifasProyecto.get(i).setNumPerfiles(listaTarifasProyecto.get(i).getNumPerfiles() + 1);
+			}
+		}
+	}
+	
+	public void restaPerfilAImputar (byte perfil) {
+		for (int i = 0; i < listaTarifasProyecto.size(); i++) {
+			if(listaTarifasProyecto.get(i).getId() == perfil){
+				listaTarifasProyecto.get(i).setNumPerfiles(listaTarifasProyecto.get(i).getNumPerfiles() - 1);
+			}
+		}
+	}
 }

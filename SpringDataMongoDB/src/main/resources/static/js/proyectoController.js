@@ -4,7 +4,6 @@ app.controller('proyectoController', [ '$scope', '$http',
                                      
 	function($scope, $http) {
 	
-		$scope.empleadoLogueado = 'No one logged in';
 		$scope.proyecto;
 		$scope.listaPerfiles;
 		

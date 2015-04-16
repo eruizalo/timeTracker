@@ -13,7 +13,6 @@ app.controller('clientesController', [ '$scope', '$http',
 		$scope.getClientes = function() {
 			$http.get('/getClientes').success(function(data) {
 				$scope.clientes = data;
-				console.log(data);
 			});
 		};
 		

@@ -123,6 +123,7 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		}
 		
 		listaTareasImputadas.add(new TareaImputada(idEmpleado, tarea));
+		proyecto.sumaPerfilAImputar(empleado.getPerfil());
 		update(proyecto);
 		
 		empleado.setProyectoTareaEnCurso(idProyecto);
@@ -176,6 +177,7 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		}
 		
 		update(proyecto);
+		proyecto.restaPerfilAImputar(empleado.getPerfil());
 		interfazEmpleados.update(empleado);
 		
 		return new ErrorDesc(0, "Tarea finalizada", null);
@@ -204,5 +206,11 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		}
 		
 		return contador;
+	}
+
+	@Override
+	public List<Proyecto> readProyectosCliente(String id) {
+		Query query = new Query(Criteria.where("_cliente").is(id));
+		return this.mongoOps.find(query, Proyecto.class, COLECCION_PROYECTOS);
 	}
 }

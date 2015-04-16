@@ -29,7 +29,7 @@
 
 </head>
 
-<body ng-controller="clienteController" ng-init="getCliente()">
+<body ng-controller="generarFacturaController" ng-init="">
 
     <div id="wrapper" ng-init="getPerfiles()">
 
@@ -177,7 +177,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Cliente
+                            Factura <small>{{cliente.nombre}}</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li>
@@ -186,8 +186,11 @@
                             <li>
                                 <i class="fa fa-institution"></i> <a href="/clientes">Clientes</a>
                             </li>
+                            <li>
+                                <i class="fa fa-user"></i> <a href="/cliente">Cliente: {{cliente.nombre}}</a>
+                            </li>
                             <li class="active">
-                                <i class="fa fa-user"></i> Cliente: {{cliente.nombre}}
+                                <i class="fa fa-file-text"></i> Factura
                             </li>
                         </ol>
                     </div>
@@ -196,62 +199,7 @@
                 
                  <!-- Body -->
                 <div class="jumbotron">
-                	<form role="form">
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            <p class="help-block"><small>{{cliente.nombre}}</small></p>
-                        </div>
-                        <div class="form-group">
-                            <label>CIF</label>
-                            <p class="help-block"><small>{{cliente.cif}}</small></p>
-                        </div>
-                        <div class="form-group">
-                            <label>Dirección</label>
-                            <p class="help-block"><small>{{cliente.direccion}}</small></p>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha de Inicio</label>
-                            <p class="help-block"><small>{{cliente.fechaInicio}}</small></p>
-                        </div>
-                        <div class="form-group">
-                            <label>Lista de tarifas</label>
-                            <div class="table-responsive">
-		                        <table class="table table-bordered table-hover table-striped">
-		                            <thead>
-		                                <tr>
-		                                    <th>Perfil</th>
-		                                    <th>Tarifa</th>
-		                                </tr>
-		                            </thead>
-		                            <tbody>
-		                                <tr ng-repeat="tarifas in cliente.listaTarifasCliente">
-		                                    <td ng-init="nombrePerfil=getPerfil(tarifas.id)">{{nombrePerfil}}</td>
-		                                    <td>{{tarifas.tarifa}} €/h</td>
-		                                </tr>
-		                            </tbody>
-		                        </table>
-	                    	</div>
-                        </div>
-                        <div class="form-group">
-                            <label>Lista de proyectos</label>
-                            <div ng-repeat="proyecto in cliente.listaProyectosActivos">
-                            	<a href="/proyecto?id={{proyecto}}">{{proyecto}}</a>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha inicio</label>
-                            <p class="help-block"><small>{{cliente.fechaInicio}}</small></p>
-                        </div>
-                        <div class="form-group">
-                            <label>Último Proyecto</label>
-                            <p class="help-block"><small>{{cliente.ultimoProyecto}}</small></p>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha último proyecto</label>
-                            <p class="help-block"><small>{{cliente.fechaUltimoProyecto}}</small></p>
-                        </div>
-                    </form>
-                    <a href="/generarFactura">Generar factura para {{cliente.nombre}}</a>
+                	
                 </div>
             </div>
             <!-- /.container-fluid -->
@@ -270,7 +218,7 @@
     
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-resource.js"></script>
-	<script src="./js/clienteController.js"></script>
+	<script src="./js/generarFacturaController.js"></script>
 
 </body>
 
