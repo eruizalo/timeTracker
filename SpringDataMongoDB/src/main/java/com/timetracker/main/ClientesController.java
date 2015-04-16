@@ -8,28 +8,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timetracker.model.Cliente;
-import com.timetracker.dao.JsonDAO;
 
 @RestController
 public class ClientesController {
+	
+	static String clienteSeleccionado = "";
 
 	@RequestMapping(value = "/getClientes", method = RequestMethod.GET)
-    private List<Cliente> listarClientes() {
-		
+    private List<Cliente> getClientes() {
 		List<Cliente> listaClientes = TimeTrackerMain.interfazClientes.readAll();
 		return listaClientes;
     }
 	
 	@RequestMapping(value = "/getCliente", method = RequestMethod.GET)
     private String getCliente(@RequestParam(value="id", defaultValue="") String id) {
-		Cliente cliente = TimeTrackerMain.interfazClientes.readById(id);
-		/*if (cliente != null){
-			String json = JsonDAO.objToJson(cliente);
-			return json + getBackLink;
-		}else {
-			return "Cliente no encontrado" + getBackLink;
-		}*/
-		return JsonDAO.objToJson(cliente);
+		/*Cliente cliente = TimeTrackerMain.interfazClientes.readById(Integer.parseInt(id)+"");
+		return JsonDAO.objToJson(cliente);*/
+		return clienteSeleccionado;
     }
 	
 	@RequestMapping(value = "/getNumClientes", method = RequestMethod.GET)

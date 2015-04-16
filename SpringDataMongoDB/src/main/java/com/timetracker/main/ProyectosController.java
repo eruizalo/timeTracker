@@ -12,6 +12,8 @@ import com.timetracker.model.Proyecto;
 
 @RestController
 public class ProyectosController {
+	
+	static String proyectoSeleccionado = "";
 
 	
 	@RequestMapping(value = "/getProyectos", method = RequestMethod.GET)
@@ -23,14 +25,9 @@ public class ProyectosController {
 	
 	@RequestMapping(value = "/getProyecto", method = RequestMethod.GET)
     private String getProyecto(@RequestParam(value="id", defaultValue="") String id) {
-		Proyecto proyecto = TimeTrackerMain.interfazProyectos.readById(Integer.parseInt(id)+"");
-		/*if (proyecto != null){
-			String json = jsonDao.objToJson(proyecto);
-			return json + getBackLink;
-		}else {
-			return "Proyecto no encontrado" + getBackLink;
-		}*/
-		return JsonDAO.objToJson(proyecto);
+		/*Proyecto proyecto = TimeTrackerMain.interfazProyectos.readById(Integer.parseInt(id)+"");
+		return JsonDAO.objToJson(proyecto);*/
+		return proyectoSeleccionado;
     }
 	
 	@RequestMapping(value = "/getNombreProyecto", method = RequestMethod.GET)
