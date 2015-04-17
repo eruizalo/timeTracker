@@ -187,7 +187,7 @@
                                 <i class="fa fa-institution"></i> <a href="/clientes">Clientes</a>
                             </li>
                             <li>
-                                <i class="fa fa-user"></i> <a href="/cliente">Cliente: {{cliente.nombre}}</a>
+                                <i class="fa fa-user-secret"></i> <a href="/cliente">Cliente: {{cliente.nombre}}</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-file-text"></i> Factura
@@ -199,7 +199,33 @@
                 
                  <!-- Body -->
                 <div class="jumbotron">
-                	
+                	<div class="form-group" ng-repeat="proyecto in proyectosCliente">
+                        <label><a href="/proyecto?id={{proyecto.id}}">{{proyecto.nombre}}</a></label>
+                        <div class="table-responsive">
+	                        <table class="table table-bordered table-hover table-striped">
+	                            <thead>
+	                                <tr>
+	                                    <th>Perfil</th>
+	                                    <th>Número de empleados</th>
+	                                    <th>Tarifa</th>
+	                                    <th>Total</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr ng-repeat="perfil in proyecto.listaTarifasProyecto">
+	                                    <td ng-init="nombrePerfil=getPerfil(perfil.id)">{{nombrePerfil}}</td>
+	                                    <td>{{perfil.numPerfiles}}</td>
+	                                    <td>{{perfil.tarifa}} €/h</td>
+	                                    <td>{{perfil.numPerfiles * perfil.tarifa}} €</td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+                    	</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Importe total:</label>
+                        <p class="help-block">{{totalFactura}} €</p>
+                    </div>
                 </div>
             </div>
             <!-- /.container-fluid -->

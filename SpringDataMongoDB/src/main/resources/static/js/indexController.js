@@ -3,6 +3,10 @@ var app = angular.module('TimeTracker', [ "ngResource" ]);
 app.controller('indexController', [ '$scope', '$http',
                                      
 	function($scope, $http) {
+	
+		$http.get('/getEmpleadoLogueado').success(function(data) {
+			$scope.empleadoLogueado = data;
+		});
 		
 		$scope.numProyectos = -1;
 		$scope.numTareasPro = -1;

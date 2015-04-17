@@ -35,6 +35,9 @@ public class ProyectosController {
     private List<Proyecto> getProyectosCliente(@RequestParam(value="id", defaultValue="") String id) {
 		//System.out.println(JsonDAO.objToJson(TimeTrackerMain.interfazProyectos.readProyectosCliente(id)));
 		//return TimeTrackerMain.interfazProyectos.readProyectosCliente(id);
+		if (null == ClientesController.clienteSeleccionado) {
+			return null;
+		}
 		List<Proyecto> listaProyectos = new ArrayList<Proyecto>();
 		
 		for (int i = 0; i < ClientesController.clienteSeleccionado.getListaProyectosActivos().size(); i++) {

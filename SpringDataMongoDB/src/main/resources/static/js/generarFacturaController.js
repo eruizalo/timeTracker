@@ -4,6 +4,8 @@ app.controller('generarFacturaController', [ '$scope', '$http',
                                      
 	function($scope, $http) {
 		
+		$scope.totalFactura = 0;
+		
 		$http.get('/getEmpleadoLogueado').success(function(data) {
 			$scope.empleado = data;
 		});
@@ -14,7 +16,19 @@ app.controller('generarFacturaController', [ '$scope', '$http',
 		
 		$http.get('/getProyectosCliente').success(function(data) {
 			$scope.proyectosCliente = data;
-			console.log(data);
+			
+			if(data != undefined) {
+				var i = 0, i2 = 0;
+				while (i < data.length){
+					i2 = 0;
+					while (i2 < data[i].listaTarifasProyecto.length){
+						$scope.totalFactura = $scope.totalFactura + 
+							(data[i].listaTarifasProyecto[i2].numPerfiles * data[i].listaTarifasProyecto[i2].tarifa);
+						i2++;
+					}
+					i++;
+				}
+			}
 		});
 		
 		$http.get('/getPerfiles').success(function(data) {

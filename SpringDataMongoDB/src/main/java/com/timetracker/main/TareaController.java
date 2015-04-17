@@ -31,8 +31,8 @@ public class TareaController {
     }
 	
 	@RequestMapping(value = "/getNumTareas", method = RequestMethod.GET)
-    private int getNumTareas() {
-		return 0;
+    private String getNumTareas() {
+		return "-";
     }
 	
 	@RequestMapping(value = "/getNumTareasProyecto", method = RequestMethod.GET)
