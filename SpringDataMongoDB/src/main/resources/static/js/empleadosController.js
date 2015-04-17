@@ -3,6 +3,10 @@ var app = angular.module('TimeTracker', [ "ngResource" ]);
 app.controller('empleadosController', [ '$scope', '$http',
                                      
 	function($scope, $http) {
+	
+		$http.get('/getEmpleadoLogueado').success(function(data) {
+			$scope.empleadoLogueado = data;
+		});
 		
 		$scope.listaEmpleados = null;
 		$scope.listaPerfiles = null;
