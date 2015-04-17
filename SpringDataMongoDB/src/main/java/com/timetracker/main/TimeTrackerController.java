@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.timetracker.model.ErrorDesc;
+
 @Controller
 //@RestController
 public class TimeTrackerController {
@@ -63,6 +65,19 @@ public class TimeTrackerController {
 	@RequestMapping(value = "/generarFactura", method = RequestMethod.GET)
     private String generarFactura(Model model) {
 		return "generarFactura";
+    }
+	
+	@RequestMapping(value = "/addTareaPost", method = RequestMethod.GET)
+    private String addTareaProyectoPost(@RequestParam(value="tarea") String tarea) {
+		String idProyecto, idEmpleado;
+		idProyecto = ProyectosController.proyectoSeleccionado.getId();
+		idEmpleado = EmpleadosController.empleadoLogueado.getId();
+		
+		ErrorDesc error = TimeTrackerMain.interfazProyectos.addTareaProyecto(idProyecto, idEmpleado, tarea);
+		
+		System.out.println(error.getErrorDesc() + " " + tarea);
+		
+		return "proyecto";
     }
 	
 	@RequestMapping(value = "/drop", method = RequestMethod.GET)

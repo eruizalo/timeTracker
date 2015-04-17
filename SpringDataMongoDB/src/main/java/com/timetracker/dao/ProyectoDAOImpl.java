@@ -112,6 +112,7 @@ public class ProyectoDAOImpl implements ProyectoDAO{
 		idProyectoTarea = empleado.getProyectoTareaEnCurso();
 		if (idProyectoTarea != null){
 			ErrorDesc error = finishTareaProyecto(idEmpleado);
+			System.out.println(error.getErrorDesc());
 			if (error.getErrorCode() != 0){
 				error.setErrorDesc("Error while adding task:" + error.getErrorDesc());
 				return error;

@@ -10,7 +10,6 @@ public class TareaImputada {
 	private String tarea;
 
 	public TareaImputada(String idUsuario, String tarea) {
-		super();
 		this.idUsuario = idUsuario;
 		this.inicioTarea = new Date();
 		this.finTarea = null;

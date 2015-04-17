@@ -268,8 +268,11 @@
 	                            </tbody>
 	                        </table>
 	                    </div>
-                        <button type="button" class="btn btn-primary" ng-disable="{{tareaSeleccionada===null}}"
-                        	ng-click="/">Comenzar tarea</button>
+                        <a type="button" class="btn btn-primary"
+                        	href="/addTareaPost?tarea={{tareaSeleccionada}}">
+                        	Comenzar tarea</a>
+                        <a type="button" class="btn btn-primary"
+                        	href="/proyecto">Refrescar</a>
                     </form>
                 </div>
 
